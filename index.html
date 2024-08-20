@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Moderustic:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Moderustic', sans-serif;
+            overflow: auto; /* Allow scrolling */
+            overflow-x: hidden;
+            background-color: #000; /* Ensure background color is black */
+        }
+
+        .welcome-screen, .main-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease, visibility 1s ease;
+            text-align: center;
+            background-color: #000; /* Ensure background color is black */
+        }
+
+        .welcome-screen {
+            background-color: #000; /* Solid color for welcome screen */
+            color: white;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .welcome-screen h1 {
+            font-size: 2.0rem; /* Adjust this value as needed */
+            text-shadow: 2px 2px #ff1493;
+            margin-bottom: 40px; /* Increased margin-bottom for more space between text and button */
+        }
+
+        .welcome-screen button {
+            background-color: white;
+            color: #ff69b4;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-family: 'Moderustic', sans-serif;
+        }
+
+        .welcome-screen button:hover {
+            background-color: #ff1493;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .welcome-screen .emoji {
+            font-size: 5rem; /* Size of the emoji */
+            animation: bounce 2s infinite; /* Bounce animation */
+            margin-bottom: 30px; /* Increased space between emoji and text */
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .main-content {
+            background-color: #000000; /* Solid color for main content */
+            opacity: 0;
+            visibility: hidden;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto; /* Allow height to adjust based on content */
+            min-height: 100vh; /* Ensure it takes at least full viewport height */
+            padding: 20px; /* Add padding around the content */
+            overflow: auto;
+        }
+
+        .main-content h1 {
+            color: #ff69b4;
+            font-size: 2.5rem; /* Adjust this value as needed */
+            margin-bottom: 30px; /* Increased margin-bottom */
+            text-shadow: 2px 2px #ff1493;
+        }
+
+        .bounce-emoji {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        .photos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px; /* Increased gap for more spacing between photos */
+            max-width: 100%;
+            margin-bottom: 30px; /* Increased margin-bottom for spacing from the message */
+        }
+
+        .photos picture {
+            display: block;
+        }
+
+        .photos img {
+            max-width: 600px; /* Increased value for larger images */
+            max-height: 500px; /* Increased value for taller images */
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            margin-top: 20px; /* Reduced margin-top to lift it up */
+            font-size: 1.5rem;
+            color: #ffffff;
+            max-width: 800px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        audio {
+            display: none; /* Hide the audio control bar */
+        }
+
+        .pop-button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-family: 'Moderustic', sans-serif;
+        }
+
+        .pop-button:hover {
+            background-color: #ff1493;
+            transform: scale(1.1);
+        }
+
+        .pop-button:focus {
+            outline: none;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-screen h1, .main-content h1 {
+                font-size: 2rem; /* Adjust this value as needed */
+            }
+
+            .message {
+                font-size: 1.3rem;
+            }
+
+            .pop-button {
+                font-size: 1.2rem;
+                padding: 12px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-screen h1, .main-content h1 {
+                font-size: 1.5rem; /* Adjust this value as needed */
+            }
+
+            .message {
+                font-size: 1.1rem;
+            }
+
+            .pop-button {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-screen">
+        <div>
+            <div class="emoji">🥳</div>
+            <h1>Nak Wish? Tekan Enter!</h1>
+            <button onclick="enterSite()">Enter</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h1>Happy 22th Birthday, Sayang <span class="bounce-emoji">💖</span></h1>
+        <div class="photos">
+            <picture>
+                <source srcset="photo1.jpg" type="image/heic">
+                <img src="photo1.jpg" alt="Photo 1">
+            </picture>
+            <picture>
+                <source srcset="photo2.jpg" type="image/heic">
+                <img src="photo2.jpg" alt="Photo 2">
+            </picture>
+            <picture>
+                <source srcset="photo3.jpg" type="image/heic">
+                <img src="photo3.jpg" alt="Photo 3">
+            </picture>
+            <!-- Add more images as needed -->
+        </div>
+        <button class="pop-button" onclick="popConfetti()">Tap Here to Turn 22!</button>
+        <div class="message">
+            <p>Hi Sayang,</p>
+            <p>
+                I just wanted to take a couple of minutes to wish you the most amazing birthday ever. You bring so much joy and happiness into my life, 
+                and I am incredibly grateful to have you by my side.
+                On this special day, I want you to know just how much you mean to me. 
+                I also want to say how sorry I am for the things I have done and also for the times I have let you down. 
+                B tahu b tak pernah perfect or atleast try to be one, and I really regret every pain I might have caused you.
+                But please know that I am committed to being better and making sure that your happiness is always an important thing for me.
+                May your birthday be filled with love, laughter, and all the wonderful things that you deserve.
+            </p>
+
+            <p>
+                You mean the world to me, and I am grateful every day for having you in my life and knowing that
+                I wake up everyday and seeing your text messages. I know I am far away from being perfect, but that's not who I am trynna be.
+                I just want to be atleast a good man for you. B minta maaf sebab b selalu harsh dengan sayang and suka marah marah sayang. Sometimes I just don't know what is wrong with myself.
+                And thank you so much too sebab sayang jadi kekasih yang sangat cuba untuk memahami b, tolerate perangai b sepanjang 3 tahun bersama.
+            </p>
+
+            <p>
+                You are like the best girlfriend ever, everything that a man ever wished for. I am grateful to have you. Semoga sayang
+                selalu dalam lindunganNya, dikurniakan kesihatan selalu, dipanjangkan umur, dimurahkan rezeki dan semoga semua impian sayang tercapai. Amin.
+            </p>
+
+            <p>
+                Hadiah claim nanti okay? Sorry b tak dapat nak beli hadiah mahal-mahal macam sayang buat untuk b
+                tapi b harap sayang suka. Walaupun b takde idea nak beli apa hahahaha.
+                But that's it baby. Thank you for your time and thank you for reading.
+                I love you sayang ❤️
+            <br><br>
+            Sincerely, BF sayang yang hensem <br>
+            <span style="color: #ff1493;">💖</span>
+            </p>
+        </div>
+        <audio id="birthday-audio" src="happy_birthday.mp3" type="audio/mpeg"></audio>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script>
+        function enterSite() {
+            const welcomeScreen = document.querySelector('.welcome-screen');
+            const mainContent = document.querySelector('.main-content');
+    
+            // Fade out the welcome screen
+            welcomeScreen.style.opacity = '0';
+            welcomeScreen.style.visibility = 'hidden';
+            
+            // After the fade-out transition ends, hide the element
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                
+                // Show and fade in the main content
+                mainContent.style.display = 'flex'; // Ensure the display property is set
+                mainContent.style.opacity = '1';
+                mainContent.style.visibility = 'visible'; // Make sure it is visible
+                mainContent.style.transform = 'scale(1)';
+                
+                // Play the audio after transition
+                const audio = document.getElementById('birthday-audio');
+                audio.play();
+                fadeOutAudio(audio, 20); // Fade out over the last 20 seconds
+            }, 1000); // Match the transition duration (1s)
+        }
+
+        function fadeOutAudio(audio, fadeDuration) {
+            const fadeOutInterval = 50; // Interval in milliseconds
+            const fadeOutSteps = fadeDuration * 1100 / fadeOutInterval; // Number of steps in the fade out
+            const volumeDecreasePerStep = audio.volume / fadeOutSteps;
+
+            let currentStep = 0;
+
+            const fadeOut = setInterval(() => {
+                if (currentStep >= fadeOutSteps) {
+                    clearInterval(fadeOut);
+                    audio.pause();
+                    audio.currentTime = 0;
+                } else {
+                    audio.volume -= volumeDecreasePerStep;
+                    currentStep++;
+                }
+            }, fadeOutInterval);
+        }
+    
+        function popConfetti() {
+            var duration = 20 * 1000; // 20 seconds
+            var animationEnd = Date.now() + duration;
+    
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+    
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+    
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+    
+                var particleCount = 200 * (timeLeft / duration); // Adjust particle count based on time left
+                // Pop confetti from random positions across the screen
+                confetti({
+                    particleCount: Math.floor(particleCount),
+                    spread: randomInRange(60, 120), // Random spread between 60 and 120 degrees
+                    origin: {
+                        x: Math.random(), // Random x position
+                        y: Math.random() // Random y position
+                    }
+                });
+            }, 250); // Interval in milliseconds
+        }
+    </script>
+</body>
+</html>
